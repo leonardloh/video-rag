@@ -452,7 +452,7 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 - [x] Implement `ViaStreamHandler.list_requests()` - list all requests
 - [x] Implement `ViaStreamHandler.get_captions()` - get all captions for request
 - [x] Implement `ViaStreamHandler.get_context_for_query()` - get formatted context for query
-- [ ] Write unit tests for `ViaStreamHandler`
+- [x] Write unit tests for `ViaStreamHandler`
 
 ---
 
@@ -580,22 +580,22 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 13.1 Unit Tests
 
-- [ ] `tests/test_gemini_file_manager.py`
-- [ ] `tests/test_gemini_vlm.py`
-- [ ] `tests/test_gemini_llm.py`
-- [ ] `tests/test_gemini_embeddings.py`
-- [ ] `tests/test_yolo_pipeline.py`
-- [ ] `tests/test_tracker.py`
-- [ ] `tests/test_file_splitter.py`
-- [ ] `tests/test_asset_manager.py`
-- [ ] `tests/test_milvus_client.py`
-- [ ] `tests/test_neo4j_client.py`
-- [ ] `tests/test_graph_ingestion.py`
-- [ ] `tests/test_graph_retrieval.py`
-- [ ] `tests/test_context_store.py`
-- [ ] `tests/test_context_manager.py`
-- [ ] `tests/test_hybrid_retrieval.py`
-- [ ] `tests/test_stream_handler.py`
+- [x] `tests/test_gemini_file_manager.py`
+- [x] `tests/test_gemini_vlm.py`
+- [x] `tests/test_gemini_llm.py`
+- [x] `tests/test_gemini_embeddings.py`
+- [x] `tests/test_yolo_pipeline.py`
+- [x] `tests/test_tracker.py`
+- [x] `tests/test_file_splitter.py`
+- [x] `tests/test_asset_manager.py`
+- [x] `tests/test_milvus_client.py`
+- [x] `tests/test_neo4j_client.py`
+- [x] `tests/test_graph_ingestion.py`
+- [x] `tests/test_graph_retrieval.py`
+- [x] `tests/test_context_store.py`
+- [x] `tests/test_context_manager.py`
+- [x] `tests/test_hybrid_retrieval.py`
+- [x] `tests/test_via_stream_handler.py`
 
 ### 13.2 Integration Tests
 
