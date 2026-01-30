@@ -618,14 +618,14 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 14.1 README (`./README.md`)
 
-- [ ] Project overview
-- [ ] Architecture diagram
-- [ ] Quick start guide
-- [ ] CLI usage examples
-- [ ] Configuration documentation
-- [ ] Database setup instructions
-- [ ] Gradio UI documentation
-- [ ] Deployment instructions
+- [x] Project overview
+- [x] Architecture diagram
+- [x] Quick start guide
+- [x] CLI usage examples
+- [x] Configuration documentation
+- [x] Database setup instructions
+- [x] Gradio UI documentation
+- [x] Deployment instructions
 
 ---
 
