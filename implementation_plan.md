@@ -599,18 +599,18 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 13.2 Integration Tests
 
-- [ ] `tests/integration/test_gemini_integration.py` - test real Gemini API
-- [ ] `tests/integration/test_milvus_integration.py` - test real Milvus
-- [ ] `tests/integration/test_neo4j_integration.py` - test real Neo4j
-- [ ] `tests/integration/test_video_processing.py` - end-to-end video test
-- [ ] `tests/integration/test_rag_pipeline.py` - test full RAG pipeline
+- [x] `tests/integration/test_gemini_integration.py` - test real Gemini API
+- [x] `tests/integration/test_milvus_integration.py` - test real Milvus
+- [x] `tests/integration/test_neo4j_integration.py` - test real Neo4j
+- [x] `tests/integration/test_video_processing.py` - end-to-end video test
+- [x] `tests/integration/test_rag_pipeline.py` - test full RAG pipeline
 
 ### 13.3 Test Fixtures
 
-- [ ] Create test video files (short clips)
-- [ ] Create mock responses for Gemini API
-- [ ] Create test configuration files
-- [ ] Create Docker Compose for test databases
+- [x] Create test video files (short clips) - generated dynamically with ffmpeg in tests
+- [x] Create mock responses for Gemini API - unit tests use mocks, integration tests use real API
+- [x] Create test configuration files - tests use programmatic configuration
+- [x] Create Docker Compose for test databases - uses existing docker-compose.yaml
 
 ---
 
