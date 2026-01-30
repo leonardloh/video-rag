@@ -328,20 +328,20 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 7.2 Graph Ingestion Function (`./src/rag/functions/graph_ingestion.py`)
 
-- [ ] Implement `GraphIngestionFunction.__init__()` - initialize with graph client
-- [ ] Implement `GraphIngestionFunction.configure()` - configure batch size, params
-- [ ] Implement `GraphIngestionFunction.execute()` - ingest document to graph
-- [ ] Implement `GraphIngestionFunction.reset()` - clear graph for stream
-- [ ] Write unit tests for `GraphIngestionFunction`
+- [x] Implement `GraphIngestionFunction.__init__()` - initialize with graph client
+- [x] Implement `GraphIngestionFunction.configure()` - configure batch size, params
+- [x] Implement `GraphIngestionFunction.execute()` - ingest document to graph
+- [x] Implement `GraphIngestionFunction.reset()` - clear graph for stream
+- [x] Write unit tests for `GraphIngestionFunction`
 
 ### 7.3 Graph Retrieval Function (`./src/rag/functions/graph_retrieval.py`)
 
-- [ ] Implement `GraphRetrievalFunction.__init__()` - initialize with graph client and LLM
-- [ ] Implement `GraphRetrievalFunction.configure()` - configure top_k, params
-- [ ] Implement `GraphRetrievalFunction.execute()` - retrieve context and generate response
-- [ ] Implement `GraphRetrievalFunction._build_context()` - combine vector and graph results
-- [ ] Implement `GraphRetrievalFunction.reset()` - reset retrieval state
-- [ ] Write unit tests for `GraphRetrievalFunction`
+- [x] Implement `GraphRetrievalFunction.__init__()` - initialize with graph client and LLM
+- [x] Implement `GraphRetrievalFunction.configure()` - configure top_k, params
+- [x] Implement `GraphRetrievalFunction.execute()` - retrieve context and generate response
+- [x] Implement `GraphRetrievalFunction._build_context()` - combine vector and graph results
+- [x] Implement `GraphRetrievalFunction.reset()` - reset retrieval state
+- [x] Write unit tests for `GraphRetrievalFunction`
 
 ### 7.4 Batch Summarization Function (`./src/rag/functions/summarization.py`)
 
