@@ -192,7 +192,7 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 - [x] Implement `FileSplitter._get_video_duration()` - get video duration using ffprobe
 - [x] Implement `FileSplitter._extract_chunk()` - extract chunk using ffmpeg
 - [x] Implement chunk overlap handling
-- [ ] Write unit tests for `FileSplitter`
+- [x] Write unit tests for `FileSplitter`
 
 ### 4.3 Asset Manager (`./src/asset_manager.py`)
 
@@ -202,7 +202,7 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 - [x] Implement `AssetManager.get_chunk_path()` - get path for chunk storage
 - [x] Implement `AssetManager.cleanup()` - cleanup temporary files
 - [x] Implement `AssetManager.get_output_path()` - get output directory for results
-- [ ] Write unit tests for `AssetManager`
+- [x] Write unit tests for `AssetManager`
 
 ### 4.4 Utilities (`./src/utils.py`)
 
@@ -352,7 +352,7 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 - [x] Implement `SummarizationFunction._aggregate_summaries()` - aggregate batch summaries
 - [x] Implement `SummarizationFunction.reset()` - reset summarization state
 - [x] Define `SummarizationInput` and `SummarizationOutput` dataclasses
-- [ ] Write unit tests for `SummarizationFunction`
+- [x] Write unit tests for `SummarizationFunction`
 
 ### 7.5 Context Store (`./src/rag/context_store.py`)
 
