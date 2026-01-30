@@ -276,42 +276,42 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 6.2 Graph Schema
 
-- [ ] Define node types:
+- [x] Define node types:
   - `VideoChunk` - represents a video chunk
     - Properties: `chunk_id`, `stream_id`, `chunk_idx`, `start_time`, `end_time`, `caption`, `embedding_id`
   - `Entity` - extracted entity from caption (person, object, location)
     - Properties: `entity_id`, `name`, `type`, `first_seen`, `last_seen`
   - `Event` - detected event/action
     - Properties: `event_id`, `description`, `start_time`, `end_time`, `severity`
-- [ ] Define relationship types:
+- [x] Define relationship types:
   - `FOLLOWS` - temporal sequence (VideoChunk → VideoChunk)
   - `CONTAINS` - chunk contains entity (VideoChunk → Entity)
   - `PARTICIPATES_IN` - entity participates in event (Entity → Event)
   - `OCCURS_IN` - event occurs in chunk (Event → VideoChunk)
   - `INTERACTS_WITH` - entity interaction (Entity → Entity)
-- [ ] Create indexes on frequently queried properties
+- [x] Create indexes on frequently queried properties (via Neo4jClient.create_indexes())
 
 ### 6.3 Graph Ingestion (`./src/db/graph_ingestion.py`)
 
-- [ ] Implement `GraphIngestion.__init__()` - initialize with Neo4j client and LLM
-- [ ] Implement `GraphIngestion.extract_entities()` - extract entities from caption using LLM
-- [ ] Implement `GraphIngestion.extract_events()` - extract events from caption using LLM
-- [ ] Implement `GraphIngestion.ingest_chunk()` - ingest single chunk to graph
-- [ ] Implement `GraphIngestion.create_temporal_links()` - create FOLLOWS relationships
-- [ ] Implement `GraphIngestion.link_entities()` - link entities across chunks
-- [ ] Implement `GraphIngestion.ingest_batch()` - batch ingest multiple chunks
-- [ ] Write unit tests for `GraphIngestion`
+- [x] Implement `GraphIngestion.__init__()` - initialize with Neo4j client and LLM
+- [x] Implement `GraphIngestion.extract_entities()` - extract entities from caption using LLM
+- [x] Implement `GraphIngestion.extract_events()` - extract events from caption using LLM
+- [x] Implement `GraphIngestion.ingest_chunk()` - ingest single chunk to graph
+- [x] Implement `GraphIngestion.create_temporal_links()` - create FOLLOWS relationships
+- [x] Implement `GraphIngestion.link_entities_across_chunks()` - link entities across chunks
+- [x] Implement `GraphIngestion.ingest_batch()` - batch ingest multiple chunks
+- [x] Write unit tests for `GraphIngestion`
 
 ### 6.4 Graph Retrieval (`./src/db/graph_retrieval.py`)
 
-- [ ] Implement `GraphRetrieval.__init__()` - initialize with Neo4j client and embeddings
-- [ ] Implement `GraphRetrieval.get_temporal_context()` - get chunks before/after a timestamp
-- [ ] Implement `GraphRetrieval.get_entity_timeline()` - get all chunks containing an entity
-- [ ] Implement `GraphRetrieval.get_related_events()` - get events related to a query
-- [ ] Implement `GraphRetrieval.traverse_from_chunk()` - traverse graph from a starting chunk
-- [ ] Implement `GraphRetrieval.find_entity_interactions()` - find entity-entity interactions
-- [ ] Implement `GraphRetrieval.get_event_context()` - get context around an event
-- [ ] Write unit tests for `GraphRetrieval`
+- [x] Implement `GraphRetrieval.__init__()` - initialize with Neo4j client and embeddings
+- [x] Implement `GraphRetrieval.get_temporal_context()` - get chunks before/after a timestamp
+- [x] Implement `GraphRetrieval.get_entity_timeline()` - get all chunks containing an entity
+- [x] Implement `GraphRetrieval.get_related_events()` - get events related to a query
+- [x] Implement `GraphRetrieval.traverse_from_chunk()` - traverse graph from a starting chunk
+- [x] Implement `GraphRetrieval.find_entity_interactions()` - find entity-entity interactions
+- [x] Implement `GraphRetrieval.get_event_context()` - get context around an event
+- [x] Write unit tests for `GraphRetrieval`
 
 ---
 
