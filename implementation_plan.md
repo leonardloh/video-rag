@@ -142,36 +142,36 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 3.1 YOLO Pipeline (`./src/cv_pipeline/yolo_pipeline.py`)
 
-- [ ] Define `DetectionResult` dataclass with filter methods
-- [ ] Define `FrameDetection` dataclass
-- [ ] Define `TrackedObject` dataclass
-- [ ] Define `TrackingResult` dataclass
-- [ ] Implement `YOLOPipeline.__init__()` - load model and configure
-- [ ] Implement `YOLOPipeline._filter_results()` - convert YOLO results to DetectionResult
-- [ ] Implement `YOLOPipeline._draw_annotations()` - draw boxes/masks on frame
-- [ ] Implement `YOLOPipeline.detect()` - single frame detection
-- [ ] Implement `YOLOPipeline.detect_batch()` - batch frame detection
-- [ ] Implement `YOLOPipeline.detect_video()` - process video file
-- [ ] Implement `YOLOPipeline.detect_video_stream()` - streaming video detection
-- [ ] Implement `YOLOPipeline.class_names` property
-- [ ] Write unit tests for `YOLOPipeline`
+- [x] Define `DetectionResult` dataclass with filter methods
+- [x] Define `FrameDetection` dataclass
+- [x] Define `TrackedObject` dataclass
+- [x] Define `TrackingResult` dataclass
+- [x] Implement `YOLOPipeline.__init__()` - load model and configure
+- [x] Implement `YOLOPipeline._filter_results()` - convert YOLO results to DetectionResult
+- [x] Implement `YOLOPipeline._draw_annotations()` - draw boxes/masks on frame
+- [x] Implement `YOLOPipeline.detect()` - single frame detection
+- [x] Implement `YOLOPipeline.detect_batch()` - batch frame detection
+- [x] Implement `YOLOPipeline.detect_video()` - process video file
+- [x] Implement `YOLOPipeline.detect_video_stream()` - streaming video detection
+- [x] Implement `YOLOPipeline.class_names` property
+- [x] Write unit tests for `YOLOPipeline`
 
 ### 3.2 Object Tracker (`./src/cv_pipeline/tracker.py`)
 
-- [ ] Implement `ObjectTracker.__init__()` - initialize ByteTrack
-- [ ] Implement `ObjectTracker.update()` - update tracker with detections
-- [ ] Implement `ObjectTracker.reset()` - reset tracker state
-- [ ] Write unit tests for `ObjectTracker`
+- [x] Implement `ObjectTracker.__init__()` - initialize ByteTrack
+- [x] Implement `ObjectTracker.update()` - update tracker with detections
+- [x] Implement `ObjectTracker.reset()` - reset tracker state
+- [x] Write unit tests for `ObjectTracker`
 
 ### 3.3 CV Metadata Fuser (`./src/cv_pipeline/cv_metadata_fuser.py`)
 
-- [ ] Implement `CVMetadataFuser.fuse()` - fuse VLM captions with CV metadata
-- [ ] Implement object counting and aggregation logic
-- [ ] Write unit tests for `CVMetadataFuser`
+- [x] Implement `CVMetadataFuser.fuse()` - fuse VLM captions with CV metadata
+- [x] Implement object counting and aggregation logic
+- [x] Write unit tests for `CVMetadataFuser`
 
 ### 3.4 CV Pipeline Module Init (`./src/cv_pipeline/__init__.py`)
 
-- [ ] Export all CV pipeline classes
+- [x] Export all CV pipeline classes
 
 ---
 
@@ -219,27 +219,27 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 5.1 Milvus Client (`./src/db/milvus_client.py`)
 
-- [ ] Define `MilvusConfig` dataclass (host, port, collection_name)
-- [ ] Define `VectorDocument` dataclass (id, text, embedding, metadata)
-- [ ] Define `SearchResult` dataclass (document, score)
-- [ ] Implement `MilvusClient.__init__()` - connect to Milvus
-- [ ] Implement `MilvusClient._ensure_collection()` - create collection with schema
-- [ ] Implement `MilvusClient._create_index()` - create vector index (IVF_FLAT, COSINE)
-- [ ] Implement `MilvusClient.insert()` - insert single document with embedding
-- [ ] Implement `MilvusClient.insert_batch()` - batch insert documents
-- [ ] Implement `MilvusClient.search()` - vector similarity search
-- [ ] Implement `MilvusClient.search_with_filter()` - search with metadata filter
-- [ ] Implement `MilvusClient.get_by_id()` - retrieve document by ID
-- [ ] Implement `MilvusClient.get_by_metadata()` - retrieve by metadata filter
-- [ ] Implement `MilvusClient.delete()` - delete document by ID
-- [ ] Implement `MilvusClient.delete_by_metadata()` - delete by metadata filter
-- [ ] Implement `MilvusClient.drop_collection()` - drop entire collection
-- [ ] Implement `MilvusClient.get_collection_stats()` - get collection statistics
-- [ ] Write unit tests for `MilvusClient`
+- [x] Define `MilvusConfig` dataclass (host, port, collection_name)
+- [x] Define `VectorDocument` dataclass (id, text, embedding, metadata)
+- [x] Define `SearchResult` dataclass (document, score)
+- [x] Implement `MilvusClient.__init__()` - connect to Milvus
+- [x] Implement `MilvusClient._ensure_collection()` - create collection with schema
+- [x] Implement `MilvusClient._create_index()` - create vector index (IVF_FLAT, COSINE)
+- [x] Implement `MilvusClient.insert()` - insert single document with embedding
+- [x] Implement `MilvusClient.insert_batch()` - batch insert documents
+- [x] Implement `MilvusClient.search()` - vector similarity search
+- [x] Implement `MilvusClient.search_with_filter()` - search with metadata filter
+- [x] Implement `MilvusClient.get_by_id()` - retrieve document by ID
+- [x] Implement `MilvusClient.get_by_metadata()` - retrieve by metadata filter
+- [x] Implement `MilvusClient.delete()` - delete document by ID
+- [x] Implement `MilvusClient.delete_by_metadata()` - delete by metadata filter
+- [x] Implement `MilvusClient.drop_collection()` - drop entire collection
+- [x] Implement `MilvusClient.get_collection_stats()` - get collection statistics
+- [x] Write unit tests for `MilvusClient`
 
 ### 5.2 Milvus Collection Schema
 
-- [ ] Define collection schema (`vss_poc_captions`):
+- [x] Define collection schema (`vss_poc_captions`):
   - `id` (VARCHAR, max 64, primary key) - unique document identifier
   - `text` (VARCHAR, max 65535) - VLM-generated caption text
   - `embedding` (FLOAT_VECTOR, dim=768) - Gemini text-embedding-004 vector
@@ -251,7 +251,7 @@ The following gaps were identified by comparing `specs/*.md` with this implement
   - `end_pts` (INT64) - presentation timestamp end (nanoseconds)
   - `cv_meta` (VARCHAR, max 65535) - JSON-encoded CV detection metadata
   - `created_at` (INT64) - Unix timestamp
-- [ ] Create index on `embedding` field (IVF_FLAT, nlist=128, metric=COSINE)
+- [x] Create index on `embedding` field (IVF_FLAT, nlist=128, metric=COSINE)
 
 ---
 
@@ -259,20 +259,20 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 6.1 Neo4j Client (`./src/db/neo4j_client.py`)
 
-- [ ] Define `Neo4jConfig` dataclass (host, port, username, password)
-- [ ] Define `GraphNode` dataclass (id, labels, properties)
-- [ ] Define `GraphRelationship` dataclass (start_node, end_node, type, properties)
-- [ ] Implement `Neo4jClient.__init__()` - connect to Neo4j
-- [ ] Implement `Neo4jClient.close()` - close connection
-- [ ] Implement `Neo4jClient.execute_query()` - execute Cypher query
-- [ ] Implement `Neo4jClient.create_node()` - create node with labels and properties
-- [ ] Implement `Neo4jClient.create_relationship()` - create relationship between nodes
-- [ ] Implement `Neo4jClient.get_node_by_id()` - retrieve node by ID
-- [ ] Implement `Neo4jClient.find_nodes()` - find nodes by label and properties
-- [ ] Implement `Neo4jClient.get_neighbors()` - get connected nodes
-- [ ] Implement `Neo4jClient.delete_node()` - delete node and relationships
-- [ ] Implement `Neo4jClient.clear_database()` - clear all nodes and relationships
-- [ ] Write unit tests for `Neo4jClient`
+- [x] Define `Neo4jConfig` dataclass (host, port, username, password)
+- [x] Define `GraphNode` dataclass (id, labels, properties)
+- [x] Define `GraphRelationship` dataclass (start_node, end_node, type, properties)
+- [x] Implement `Neo4jClient.__init__()` - connect to Neo4j
+- [x] Implement `Neo4jClient.close()` - close connection
+- [x] Implement `Neo4jClient.execute_query()` - execute Cypher query
+- [x] Implement `Neo4jClient.create_node()` - create node with labels and properties
+- [x] Implement `Neo4jClient.create_relationship()` - create relationship between nodes
+- [x] Implement `Neo4jClient.get_node_by_id()` - retrieve node by ID
+- [x] Implement `Neo4jClient.find_nodes()` - find nodes by label and properties
+- [x] Implement `Neo4jClient.get_neighbors()` - get connected nodes
+- [x] Implement `Neo4jClient.delete_node()` - delete node and relationships
+- [x] Implement `Neo4jClient.clear_database()` - clear all nodes and relationships
+- [x] Write unit tests for `Neo4jClient`
 
 ### 6.2 Graph Schema
 
