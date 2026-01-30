@@ -518,20 +518,20 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 11.1 Gradio App (`./src/ui/gradio_app.py`)
 
-- [ ] Implement video upload component
-- [ ] Implement processing status display
-- [ ] Implement progress bar
-- [ ] Implement caption display (per chunk)
-- [ ] Implement summary display
-- [ ] Implement chat interface with history
-- [ ] Implement CV detection toggle
-- [ ] Implement configuration panel
-- [ ] Implement database status display (Milvus, Neo4j connection)
-- [ ] Implement results export (JSON download)
+- [x] Implement video upload component
+- [x] Implement processing status display
+- [x] Implement progress bar
+- [x] Implement caption display (per chunk)
+- [x] Implement summary display
+- [x] Implement chat interface with history
+- [x] Implement CV detection toggle
+- [x] Implement configuration panel
+- [x] Implement database status display (Milvus, Neo4j connection)
+- [x] Implement results export (JSON download)
 
 ### 11.2 UI Module Init (`./src/ui/__init__.py`)
 
-- [ ] Export Gradio app
+- [x] Export Gradio app
 
 ---
 
@@ -539,40 +539,40 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 12.1 Dockerfile (`./Dockerfile`)
 
-- [ ] Create multi-stage Dockerfile
-- [ ] Install Python dependencies
-- [ ] Install ffmpeg
-- [ ] Configure YOLO model download
-- [ ] Set up entrypoint (CLI or Gradio)
+- [x] Create multi-stage Dockerfile
+- [x] Install Python dependencies
+- [x] Install ffmpeg
+- [x] Configure YOLO model download
+- [x] Set up entrypoint (CLI or Gradio)
 
 ### 12.2 Docker Compose (`./docker-compose.yaml`)
 
-- [ ] Define vss-poc service (main application)
-- [ ] Define milvus-standalone service
+- [x] Define vss-poc service (main application)
+- [x] Define milvus-standalone service
   - Image: `milvusdb/milvus:v2.5.4`
   - Ports: 19530 (gRPC), 9091 (HTTP)
   - Health check configuration
   - Volume for data persistence
-- [ ] Define neo4j service (graph-db)
+- [x] Define neo4j service (graph-db)
   - Image: `neo4j:5.26.4`
   - Ports: 7474 (HTTP), 7687 (Bolt)
   - Environment: NEO4J_AUTH, NEO4J_PLUGINS (apoc)
   - Volume for data persistence
-- [ ] Configure environment variables
-- [ ] Configure volumes for video storage
-- [ ] Configure network for inter-service communication
-- [ ] Configure GPU access (optional)
-- [ ] Add depends_on with health checks
+- [x] Configure environment variables
+- [x] Configure volumes for video storage
+- [x] Configure network for inter-service communication
+- [x] Configure GPU access (optional)
+- [x] Add depends_on with health checks
 
 ### 12.3 Environment Files
 
-- [ ] Create `./.env.example` with all variables:
+- [x] Create `./.env.example` with all variables:
   - GEMINI_API_KEY (required)
   - MILVUS_HOST, MILVUS_PORT
   - NEO4J_HOST, NEO4J_PORT, NEO4J_USERNAME, NEO4J_PASSWORD
   - YOLO settings
   - Processing settings
-- [ ] Document required vs optional variables
+- [x] Document required vs optional variables
 
 ---
 

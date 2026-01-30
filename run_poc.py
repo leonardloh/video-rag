@@ -135,14 +135,15 @@ async def initialize_components(
     # Initialize Milvus if enabled
     if enable_milvus:
         try:
-            from src.db.milvus_client import MilvusClient
+            from src.db.milvus_client import MilvusClient, MilvusConfig
 
-            milvus_config = config.get("rag", {}).get("vector_db", {})
-            components["milvus_client"] = MilvusClient(
-                host=milvus_config.get("host", os.environ.get("MILVUS_HOST", "localhost")),
-                port=milvus_config.get("port", int(os.environ.get("MILVUS_PORT", "19530"))),
-                collection_name=milvus_config.get("collection_name", "vss_poc_captions"),
+            milvus_cfg = config.get("rag", {}).get("vector_db", {})
+            milvus_config = MilvusConfig(
+                host=milvus_cfg.get("host", os.environ.get("MILVUS_HOST", "localhost")),
+                port=milvus_cfg.get("port", int(os.environ.get("MILVUS_PORT", "19530"))),
+                collection_name=milvus_cfg.get("collection_name", "vss_poc_captions"),
             )
+            components["milvus_client"] = MilvusClient(config=milvus_config)
             logging.info("Milvus client initialized")
         except Exception as e:
             logging.warning(f"Failed to initialize Milvus client: {e}")
@@ -150,15 +151,16 @@ async def initialize_components(
     # Initialize Neo4j if enabled
     if enable_neo4j:
         try:
-            from src.db.neo4j_client import Neo4jClient
+            from src.db.neo4j_client import Neo4jClient, Neo4jConfig
 
-            neo4j_config = config.get("rag", {}).get("graph_db", {})
-            components["neo4j_client"] = Neo4jClient(
-                host=neo4j_config.get("host", os.environ.get("NEO4J_HOST", "localhost")),
-                port=neo4j_config.get("port", int(os.environ.get("NEO4J_BOLT_PORT", "7687"))),
-                username=neo4j_config.get("username", os.environ.get("NEO4J_USERNAME", "neo4j")),
-                password=neo4j_config.get("password", os.environ.get("NEO4J_PASSWORD", "")),
+            neo4j_cfg = config.get("rag", {}).get("graph_db", {})
+            neo4j_config = Neo4jConfig(
+                host=neo4j_cfg.get("host", os.environ.get("NEO4J_HOST", "localhost")),
+                port=neo4j_cfg.get("port", int(os.environ.get("NEO4J_BOLT_PORT", "7687"))),
+                username=neo4j_cfg.get("username", os.environ.get("NEO4J_USERNAME", "neo4j")),
+                password=neo4j_cfg.get("password", os.environ.get("NEO4J_PASSWORD", "")),
             )
+            components["neo4j_client"] = Neo4jClient(config=neo4j_config)
             logging.info("Neo4j client initialized")
         except Exception as e:
             logging.warning(f"Failed to initialize Neo4j client: {e}")
