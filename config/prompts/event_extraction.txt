@@ -1,0 +1,26 @@
+Extract all events/actions from the following video caption. For each event:
+- description: What happened
+- event_type: Category (MOVEMENT, INTERACTION, SAFETY_INCIDENT, OPERATION, ANOMALY)
+- severity: LOW, MEDIUM, HIGH, or CRITICAL
+- participants: List of entity names involved
+- start_time: When event started (from caption timestamps)
+- end_time: When event ended
+
+Caption:
+{caption}
+
+Entities present:
+{entities}
+
+Return as JSON array:
+[
+  {{
+    "description": "...",
+    "event_type": "...",
+    "severity": "...",
+    "participants": ["...", "..."],
+    "start_time": "HH:MM:SS",
+    "end_time": "HH:MM:SS"
+  }},
+  ...
+]

@@ -35,9 +35,9 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ## Phase 1: Project Setup
 
-- [ ] Create `src` directory structure
-- [ ] Create `./pyproject.toml` with project metadata and dependencies
-- [ ] Create `./requirements.txt` with all dependencies:
+- [x] Create `src` directory structure
+- [x] Create `./pyproject.toml` with project metadata and dependencies
+- [x] Create `./requirements.txt` with all dependencies:
   - Core: `pydantic`, `numpy`
   - Gemini: `google-generativeai`, `google-auth`
   - CV: `ultralytics`, `opencv-python`, `torch`
@@ -48,9 +48,9 @@ The following gaps were identified by comparing `specs/*.md` with this implement
   - Utils: `pillow`, `aiofiles`, `tenacity`, `pyyaml`, `python-dotenv`, `pyaml-env`
   - UI: `gradio`
   - Dev: `pytest`, `pytest-asyncio`
-- [ ] Create `./config/config.yaml` with default configuration (tools, functions, context_manager sections)
-- [ ] Create `./.env.example` with required environment variables
-- [ ] Create `./src/__init__.py` and package structure
+- [x] Create `./config/config.yaml` with default configuration (tools, functions, context_manager sections)
+- [x] Create `./.env.example` with required environment variables
+- [x] Create `./src/__init__.py` and package structure
 
 ---
 
@@ -58,83 +58,83 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 2.1 Gemini File Manager (`./src/models/gemini/gemini_file_manager.py`)
 
-- [ ] Define `FileState` enum (PROCESSING, ACTIVE, FAILED)
-- [ ] Define `FileUploadResult` dataclass
-- [ ] Define `FileStatus` dataclass
-- [ ] Define custom exceptions (`VideoTooLongError`, `UnsupportedFormatError`, `UploadError`, `ProcessingTimeoutError`)
-- [ ] Implement `GeminiFileManager.__init__()` - initialize with API key
-- [ ] Implement `GeminiFileManager._validate_video()` - validate file format and size
-- [ ] Implement `GeminiFileManager.upload_video()` - upload video to Gemini File API
-- [ ] Implement `GeminiFileManager.wait_for_processing()` - poll until ACTIVE status
-- [ ] Implement `GeminiFileManager.upload_and_wait()` - convenience method combining upload + wait
-- [ ] Implement `GeminiFileManager.delete_file()` - delete uploaded file
-- [ ] Implement `GeminiFileManager.list_files()` - list all uploaded files
-- [ ] Implement `GeminiFileManager.get_file_status()` - get current file status
-- [ ] Implement `GeminiFileManager.upload_multiple()` - concurrent uploads with semaphore
-- [ ] Implement `GeminiFileManager.cleanup_expired_files()` - cleanup tracking of expired files
-- [ ] Write unit tests for `GeminiFileManager`
+- [x] Define `FileState` enum (PROCESSING, ACTIVE, FAILED)
+- [x] Define `FileUploadResult` dataclass
+- [x] Define `FileStatus` dataclass
+- [x] Define custom exceptions (`VideoTooLongError`, `UnsupportedFormatError`, `UploadError`, `ProcessingTimeoutError`)
+- [x] Implement `GeminiFileManager.__init__()` - initialize with API key
+- [x] Implement `GeminiFileManager._validate_video()` - validate file format and size
+- [x] Implement `GeminiFileManager.upload_video()` - upload video to Gemini File API
+- [x] Implement `GeminiFileManager.wait_for_processing()` - poll until ACTIVE status
+- [x] Implement `GeminiFileManager.upload_and_wait()` - convenience method combining upload + wait
+- [x] Implement `GeminiFileManager.delete_file()` - delete uploaded file
+- [x] Implement `GeminiFileManager.list_files()` - list all uploaded files
+- [x] Implement `GeminiFileManager.get_file_status()` - get current file status
+- [x] Implement `GeminiFileManager.upload_multiple()` - concurrent uploads with semaphore
+- [x] Implement `GeminiFileManager.cleanup_expired_files()` - cleanup tracking of expired files
+- [x] Write unit tests for `GeminiFileManager`
 
 ### 2.2 Gemini VLM (`./src/models/gemini/gemini_vlm.py`)
 
-- [ ] Define `VideoEvent` dataclass
-- [ ] Define `TokenUsage` dataclass
-- [ ] Define `SafetyRating` dataclass
-- [ ] Define `VideoAnalysisResult` dataclass
-- [ ] Define `GenerationConfig` dataclass
-- [ ] Define `SafetySettings` dataclass
-- [ ] Define custom exceptions (`VLMError`, `SafetyBlockedError`, `ContextLengthExceededError`, `GenerationError`)
-- [ ] Implement `GeminiVLM.__init__()` - initialize with API key and model config
-- [ ] Implement `GeminiVLM._build_generation_config()` - build config dict for API
-- [ ] Implement `GeminiVLM._build_safety_settings()` - build safety settings list
-- [ ] Implement `GeminiVLM._extract_usage()` - extract token usage from response
-- [ ] Implement `GeminiVLM._extract_safety_ratings()` - extract safety ratings
-- [ ] Implement `GeminiVLM.parse_events()` - parse timestamped events from caption text
-- [ ] Implement `GeminiVLM.analyze_video()` - analyze video with prompt
-- [ ] Implement `GeminiVLM.analyze_video_with_context()` - analyze with previous chunk context
-- [ ] Implement `GeminiVLM.analyze_video_batch()` - analyze multiple videos concurrently
-- [ ] Write unit tests for `GeminiVLM`
+- [x] Define `VideoEvent` dataclass
+- [x] Define `TokenUsage` dataclass
+- [x] Define `SafetyRating` dataclass
+- [x] Define `VideoAnalysisResult` dataclass
+- [x] Define `GenerationConfig` dataclass
+- [x] Define `SafetySettings` dataclass
+- [x] Define custom exceptions (`VLMError`, `SafetyBlockedError`, `ContextLengthExceededError`, `GenerationError`)
+- [x] Implement `GeminiVLM.__init__()` - initialize with API key and model config
+- [x] Implement `GeminiVLM._build_generation_config()` - build config dict for API
+- [x] Implement `GeminiVLM._build_safety_settings()` - build safety settings list
+- [x] Implement `GeminiVLM._extract_usage()` - extract token usage from response
+- [x] Implement `GeminiVLM._extract_safety_ratings()` - extract safety ratings
+- [x] Implement `GeminiVLM.parse_events()` - parse timestamped events from caption text
+- [x] Implement `GeminiVLM.analyze_video()` - analyze video with prompt
+- [x] Implement `GeminiVLM.analyze_video_with_context()` - analyze with previous chunk context
+- [x] Implement `GeminiVLM.analyze_video_batch()` - analyze multiple videos concurrently
+- [x] Write unit tests for `GeminiVLM`
 
 ### 2.3 Gemini LLM (`./src/models/gemini/gemini_llm.py`)
 
-- [ ] Define `TokenUsage` dataclass (or reuse from VLM)
-- [ ] Define `SafetyRating` dataclass (or reuse from VLM)
-- [ ] Define `GenerationResult` dataclass
-- [ ] Define `Message` dataclass
-- [ ] Define `LLMGenerationConfig` dataclass
-- [ ] Implement `GeminiLLM.__init__()` - initialize with API key and model config
-- [ ] Implement `GeminiLLM._build_generation_config()` - build config dict
-- [ ] Implement `GeminiLLM._convert_messages()` - convert Message objects to Gemini format
-- [ ] Implement `GeminiLLM.generate()` - single-turn text generation
-- [ ] Implement `GeminiLLM.generate_stream()` - streaming text generation
-- [ ] Implement `GeminiLLM.chat()` - multi-turn chat
-- [ ] Implement `GeminiLLM.chat_stream()` - streaming multi-turn chat
-- [ ] Implement `GeminiLLM.summarize_captions()` - summarize batch of captions
-- [ ] Implement `GeminiLLM.aggregate_summaries()` - aggregate multiple summaries
-- [ ] Implement `GeminiLLM.check_notification()` - check caption for notification events
-- [ ] Write unit tests for `GeminiLLM`
+- [x] Define `TokenUsage` dataclass (or reuse from VLM)
+- [x] Define `SafetyRating` dataclass (or reuse from VLM)
+- [x] Define `GenerationResult` dataclass
+- [x] Define `Message` dataclass
+- [x] Define `LLMGenerationConfig` dataclass
+- [x] Implement `GeminiLLM.__init__()` - initialize with API key and model config
+- [x] Implement `GeminiLLM._build_generation_config()` - build config dict
+- [x] Implement `GeminiLLM._convert_messages()` - convert Message objects to Gemini format
+- [x] Implement `GeminiLLM.generate()` - single-turn text generation
+- [x] Implement `GeminiLLM.generate_stream()` - streaming text generation
+- [x] Implement `GeminiLLM.chat()` - multi-turn chat
+- [x] Implement `GeminiLLM.chat_stream()` - streaming multi-turn chat
+- [x] Implement `GeminiLLM.summarize_captions()` - summarize batch of captions
+- [x] Implement `GeminiLLM.aggregate_summaries()` - aggregate multiple summaries
+- [x] Implement `GeminiLLM.check_notification()` - check caption for notification events
+- [x] Write unit tests for `GeminiLLM`
 
 ### 2.4 Gemini Embeddings (`./src/models/gemini/gemini_embeddings.py`)
 
-- [ ] Define `TaskType` enum (RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, etc.)
-- [ ] Define `EmbeddingResult` dataclass
-- [ ] Define `BatchEmbeddingResult` dataclass
-- [ ] Implement `GeminiEmbeddings.__init__()` - initialize with API key
-- [ ] Implement `GeminiEmbeddings._truncate_text()` - truncate text to max length
-- [ ] Implement `GeminiEmbeddings._chunk_batch()` - split texts into batches
-- [ ] Implement `GeminiEmbeddings._embed_sync()` - synchronous embedding (for executor)
-- [ ] Implement `GeminiEmbeddings.embed_text()` - embed single text
-- [ ] Implement `GeminiEmbeddings.embed_batch()` - embed multiple texts
-- [ ] Implement `GeminiEmbeddings.embed_query()` - convenience for query embedding
-- [ ] Implement `GeminiEmbeddings.embed_document()` - convenience for document embedding
-- [ ] Implement `GeminiEmbeddings.embed_documents()` - batch document embedding
-- [ ] Implement `GeminiEmbeddings.cosine_similarity()` - static similarity calculation
-- [ ] Write unit tests for `GeminiEmbeddings`
+- [x] Define `TaskType` enum (RETRIEVAL_DOCUMENT, RETRIEVAL_QUERY, etc.)
+- [x] Define `EmbeddingResult` dataclass
+- [x] Define `BatchEmbeddingResult` dataclass
+- [x] Implement `GeminiEmbeddings.__init__()` - initialize with API key
+- [x] Implement `GeminiEmbeddings._truncate_text()` - truncate text to max length
+- [x] Implement `GeminiEmbeddings._chunk_batch()` - split texts into batches
+- [x] Implement `GeminiEmbeddings._embed_sync()` - synchronous embedding (for executor)
+- [x] Implement `GeminiEmbeddings.embed_text()` - embed single text
+- [x] Implement `GeminiEmbeddings.embed_batch()` - embed multiple texts
+- [x] Implement `GeminiEmbeddings.embed_query()` - convenience for query embedding
+- [x] Implement `GeminiEmbeddings.embed_document()` - convenience for document embedding
+- [x] Implement `GeminiEmbeddings.embed_documents()` - batch document embedding
+- [x] Implement `GeminiEmbeddings.cosine_similarity()` - static similarity calculation
+- [x] Write unit tests for `GeminiEmbeddings`
 
 ### 2.5 Gemini Module Init (`./src/models/gemini/__init__.py`)
 
-- [ ] Export all Gemini classes
-- [ ] Export all dataclasses and enums
-- [ ] Export all exceptions
+- [x] Export all Gemini classes
+- [x] Export all dataclasses and enums
+- [x] Export all exceptions
 
 ---
 
@@ -179,39 +179,39 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 4.1 Chunk Info (`./src/chunk_info.py`)
 
-- [ ] Define `ChunkInfo` dataclass with all metadata fields:
+- [x] Define `ChunkInfo` dataclass with all metadata fields:
   - `chunkIdx`, `streamId`, `file`, `start_ntp`, `end_ntp`
   - `start_pts`, `end_pts` (presentation timestamps in nanoseconds)
-- [ ] Implement timestamp formatting helpers
-- [ ] Implement chunk duration calculation
+- [x] Implement timestamp formatting helpers
+- [x] Implement chunk duration calculation
 
 ### 4.2 File Splitter (`./src/file_splitter.py`)
 
-- [ ] Implement `FileSplitter.__init__()` - configure chunk duration and overlap
-- [ ] Implement `FileSplitter.split()` - split video into chunks
-- [ ] Implement `FileSplitter._get_video_duration()` - get video duration using ffprobe
-- [ ] Implement `FileSplitter._extract_chunk()` - extract chunk using ffmpeg
-- [ ] Implement chunk overlap handling
+- [x] Implement `FileSplitter.__init__()` - configure chunk duration and overlap
+- [x] Implement `FileSplitter.split()` - split video into chunks
+- [x] Implement `FileSplitter._get_video_duration()` - get video duration using ffprobe
+- [x] Implement `FileSplitter._extract_chunk()` - extract chunk using ffmpeg
+- [x] Implement chunk overlap handling
 - [ ] Write unit tests for `FileSplitter`
 
 ### 4.3 Asset Manager (`./src/asset_manager.py`)
 
-- [ ] Define `AssetManager` class for managing video assets and temporary files
-- [ ] Implement `AssetManager.__init__()` - configure storage paths
-- [ ] Implement `AssetManager.store_video()` - store uploaded video
-- [ ] Implement `AssetManager.get_chunk_path()` - get path for chunk storage
-- [ ] Implement `AssetManager.cleanup()` - cleanup temporary files
-- [ ] Implement `AssetManager.get_output_path()` - get output directory for results
+- [x] Define `AssetManager` class for managing video assets and temporary files
+- [x] Implement `AssetManager.__init__()` - configure storage paths
+- [x] Implement `AssetManager.store_video()` - store uploaded video
+- [x] Implement `AssetManager.get_chunk_path()` - get path for chunk storage
+- [x] Implement `AssetManager.cleanup()` - cleanup temporary files
+- [x] Implement `AssetManager.get_output_path()` - get output directory for results
 - [ ] Write unit tests for `AssetManager`
 
 ### 4.4 Utilities (`./src/utils.py`)
 
-- [ ] Implement timestamp parsing utilities (HH:MM:SS to seconds)
-- [ ] Implement timestamp formatting utilities (seconds to HH:MM:SS)
-- [ ] Implement PTS conversion utilities (nanoseconds)
-- [ ] Implement file size formatting
-- [ ] Implement duration formatting
-- [ ] Implement retry decorator with exponential backoff
+- [x] Implement timestamp parsing utilities (HH:MM:SS to seconds)
+- [x] Implement timestamp formatting utilities (seconds to HH:MM:SS)
+- [x] Implement PTS conversion utilities (nanoseconds)
+- [x] Implement file size formatting
+- [x] Implement duration formatting
+- [x] Implement retry decorator with exponential backoff
 
 ---
 
@@ -454,33 +454,33 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 9.1 Configuration (`./config/config.yaml`)
 
-- [ ] Define Gemini configuration (VLM, LLM, embeddings)
-- [ ] Define CV pipeline configuration (YOLO, tracker)
-- [ ] Define processing configuration (chunk duration, overlap)
-- [ ] Define Milvus configuration (host, port, collection settings)
-- [ ] Define Neo4j configuration (host, port, credentials)
-- [ ] Define RAG configuration (batch size, top_k, functions)
-- [ ] Define context_manager configuration (enabled functions)
-- [ ] Define logging configuration
+- [x] Define Gemini configuration (VLM, LLM, embeddings)
+- [x] Define CV pipeline configuration (YOLO, tracker)
+- [x] Define processing configuration (chunk duration, overlap)
+- [x] Define Milvus configuration (host, port, collection settings)
+- [x] Define Neo4j configuration (host, port, credentials)
+- [x] Define RAG configuration (batch size, top_k, functions)
+- [x] Define context_manager configuration (enabled functions)
+- [x] Define logging configuration
 
 ### 9.2 Prompts
 
-- [ ] Create `./config/prompts/caption.txt` - VLM captioning prompt (timestamped events)
-- [ ] Create `./config/prompts/caption_warehouse.txt` - warehouse-specific prompt (safety focus)
-- [ ] Create `./config/prompts/summarization.txt` - caption summarization prompt (batch)
-- [ ] Create `./config/prompts/aggregation.txt` - summary aggregation prompt (cluster by category)
-- [ ] Create `./config/prompts/chat.txt` - chat system prompt (video analysis assistant)
-- [ ] Create `./config/prompts/entity_extraction.txt` - entity extraction prompt (PERSON, VEHICLE, OBJECT, LOCATION)
-- [ ] Create `./config/prompts/event_extraction.txt` - event extraction prompt (MOVEMENT, INTERACTION, SAFETY_INCIDENT, OPERATION, ANOMALY)
+- [x] Create `./config/prompts/caption.txt` - VLM captioning prompt (timestamped events)
+- [x] Create `./config/prompts/caption_warehouse.txt` - warehouse-specific prompt (safety focus)
+- [x] Create `./config/prompts/summarization.txt` - caption summarization prompt (batch)
+- [x] Create `./config/prompts/aggregation.txt` - summary aggregation prompt (cluster by category)
+- [x] Create `./config/prompts/chat.txt` - chat system prompt (video analysis assistant)
+- [x] Create `./config/prompts/entity_extraction.txt` - entity extraction prompt (PERSON, VEHICLE, OBJECT, LOCATION)
+- [x] Create `./config/prompts/event_extraction.txt` - event extraction prompt (MOVEMENT, INTERACTION, SAFETY_INCIDENT, OPERATION, ANOMALY)
 
 ### 9.3 Configuration Loader (`./src/config.py`)
 
-- [ ] Implement `load_config()` - load YAML config
-- [ ] Implement environment variable substitution (!ENV syntax)
-- [ ] Implement `get_prompt()` - load prompt from file
-- [ ] Implement configuration validation
-- [ ] Implement `build_tools_config()` - build tools configuration dict
-- [ ] Implement `build_functions_config()` - build functions configuration dict
+- [x] Implement `load_config()` - load YAML config
+- [x] Implement environment variable substitution (!ENV syntax)
+- [x] Implement `get_prompt()` - load prompt from file
+- [x] Implement configuration validation
+- [x] Implement `build_tools_config()` - build tools configuration dict
+- [x] Implement `build_functions_config()` - build functions configuration dict
 
 ---
 

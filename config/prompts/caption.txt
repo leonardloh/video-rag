@@ -1,0 +1,6 @@
+Analyze this video segment and provide detailed captions of all events.
+For each distinct event or action, provide:
+- Start and end timestamps in format <HH:MM:SS>
+- Detailed description of what is happening
+- Any relevant objects, people, or text visible
+Focus on actions, interactions, and notable occurrences.

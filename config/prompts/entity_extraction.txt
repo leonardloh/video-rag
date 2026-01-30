@@ -1,0 +1,16 @@
+Extract all entities from the following video caption. For each entity, provide:
+- name: The entity identifier (e.g., "forklift", "worker in blue", "pallet")
+- type: One of PERSON, VEHICLE, OBJECT, LOCATION
+- attributes: Any descriptive attributes (color, size, position)
+
+Caption:
+{caption}
+
+CV Metadata (if available):
+{cv_metadata}
+
+Return as JSON array:
+[
+  {{"name": "...", "type": "...", "attributes": {{...}}}},
+  ...
+]

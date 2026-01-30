@@ -1,0 +1,10 @@
+Write a concise and clear dense caption for the provided warehouse video,
+focusing on irregular or hazardous events such as:
+- boxes falling
+- workers not wearing PPE
+- workers falling
+- workers taking photographs
+- workers chitchatting
+- forklift stuck
+
+Start and end each sentence with a timestamp in format <HH:MM:SS>.

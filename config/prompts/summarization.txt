@@ -1,0 +1,9 @@
+Given the following timestamped captions from a video, create a structured summary.
+Group related events together and identify:
+- Key activities and their timeframes
+- Notable incidents or anomalies
+- Patterns or recurring events
+Format as bullet points with time ranges.
+
+Captions:
+{captions}

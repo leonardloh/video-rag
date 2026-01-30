@@ -1,0 +1,177 @@
+# VSS PoC Configuration
+
+# Gemini Configuration
+gemini:
+  api_key: !ENV ${GEMINI_API_KEY}
+
+  # VLM (Video Understanding)
+  vlm:
+    model: "gemini-2.0-flash"
+    generation_config:
+      temperature: 0.2
+      top_p: 0.8
+      top_k: 40
+      max_output_tokens: 2048
+    safety_settings:
+      harassment: BLOCK_ONLY_HIGH
+      hate_speech: BLOCK_ONLY_HIGH
+      sexually_explicit: BLOCK_ONLY_HIGH
+      dangerous_content: BLOCK_ONLY_HIGH
+
+  # LLM (Text Generation for RAG)
+  llm:
+    model: "gemini-2.0-flash"
+    generation_config:
+      temperature: 0.3
+      top_p: 0.9
+      max_output_tokens: 4096
+
+  # Embeddings
+  embeddings:
+    model: "text-embedding-004"
+    dimensions: 768
+
+# CV Pipeline Configuration
+cv_pipeline:
+  enabled: true
+  yolo:
+    model: "yolov8n-seg"
+    confidence: 0.5
+    iou_threshold: 0.45
+    device: "cuda:0"
+    half_precision: true
+    target_classes:
+      - person
+      - car
+      - truck
+      - forklift
+
+  tracker:
+    algorithm: "bytetrack"
+    track_thresh: 0.5
+    track_buffer: 30
+    match_thresh: 0.8
+
+# Video Processing
+processing:
+  chunk_duration: 60
+  chunk_overlap: 2
+  max_concurrent_chunks: 4
+
+# RAG Configuration
+rag:
+  enabled: true
+  max_context_tokens: 100000
+
+  vector_db:
+    enabled: true
+    type: milvus
+    host: !ENV ${MILVUS_HOST:localhost}
+    port: !ENV ${MILVUS_PORT:19530}
+    collection_name: "vss_poc_captions"
+
+  graph_db:
+    enabled: true
+    type: neo4j
+    host: !ENV ${NEO4J_HOST:localhost}
+    port: !ENV ${NEO4J_BOLT_PORT:7687}
+    username: !ENV ${NEO4J_USERNAME:neo4j}
+    password: !ENV ${NEO4J_PASSWORD}
+
+  retrieval:
+    mode: hybrid
+    vector_weight: 0.6
+    graph_weight: 0.4
+    top_k: 5
+    rerank: true
+    temporal_boost: 1.2
+
+  functions:
+    summarization:
+      batch_size: 6
+    ingestion:
+      extract_entities: true
+      extract_events: true
+      link_entities: true
+
+# Tools Configuration (for CA-RAG)
+tools:
+  graph_db:
+    type: neo4j
+    params:
+      host: !ENV ${NEO4J_HOST:localhost}
+      port: !ENV ${NEO4J_BOLT_PORT:7687}
+      username: !ENV ${NEO4J_USERNAME:neo4j}
+      password: !ENV ${NEO4J_PASSWORD}
+    tools:
+      embedding: gemini_embedding
+
+  vector_db:
+    type: milvus
+    params:
+      host: !ENV ${MILVUS_HOST:localhost}
+      port: !ENV ${MILVUS_PORT:19530}
+      collection_name: "vss_poc_captions"
+    tools:
+      embedding: gemini_embedding
+
+  gemini_vlm:
+    type: vlm
+    params:
+      model: "gemini-2.0-flash"
+      api_key: !ENV ${GEMINI_API_KEY}
+
+  gemini_llm:
+    type: llm
+    params:
+      model: "gemini-2.0-flash"
+      api_key: !ENV ${GEMINI_API_KEY}
+      max_tokens: 4096
+      temperature: 0.3
+
+  gemini_embedding:
+    type: embedding
+    params:
+      model: "text-embedding-004"
+      api_key: !ENV ${GEMINI_API_KEY}
+
+functions:
+  summarization:
+    type: batch_summarization
+    params:
+      batch_size: 6
+    tools:
+      llm: gemini_llm
+      db: vector_db
+
+  ingestion_function:
+    type: graph_ingestion
+    params:
+      batch_size: 1
+      extract_entities: true
+      extract_events: true
+      link_entities: true
+    tools:
+      llm: gemini_llm
+      db: graph_db
+
+  retriever_function:
+    type: graph_retrieval
+    params:
+      top_k: 5
+      retrieval_mode: hybrid
+      chat_history: true
+    tools:
+      llm: gemini_llm
+      db: graph_db
+
+context_manager:
+  functions:
+    - summarization
+    - ingestion_function
+    - retriever_function
+
+# Logging
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

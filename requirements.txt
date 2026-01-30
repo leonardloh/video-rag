@@ -1,0 +1,42 @@
+# Core
+pydantic>=2.0.0
+numpy>=1.24.0
+
+# Gemini SDK
+google-generativeai>=0.8.0
+google-auth>=2.0.0
+
+# CV Pipeline
+ultralytics>=8.3.0
+opencv-python>=4.8.0
+torch>=2.0.0
+
+# Video Processing
+av>=11.0.0
+ffmpeg-python>=0.2.0
+
+# Tracking
+supervision>=0.20.0
+
+# Vector DB (Milvus) - Required
+pymilvus>=2.5.0
+
+# Graph DB (Neo4j) - Required
+neo4j>=5.0.0
+
+# Utilities
+pillow>=10.0.0
+aiofiles>=23.0.0
+tenacity>=8.0.0
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+pyaml-env>=1.2.0
+
+# UI
+gradio>=4.0.0
+
+# Development
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+ruff>=0.1.0
+pyrefly>=0.15.0

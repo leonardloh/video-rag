@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vss-poc"
+version = "0.1.0"
+description = "Video Search and Summarization PoC using Gemini VLM/LLM, YOLOv26, Milvus, and Neo4j"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "VSS Team"}
+]
+keywords = ["video", "search", "summarization", "rag", "gemini", "yolo", "milvus", "neo4j"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "pydantic>=2.0.0",
+    "numpy>=1.24.0",
+    "google-generativeai>=0.8.0",
+    "google-auth>=2.0.0",
+    "ultralytics>=8.3.0",
+    "opencv-python>=4.8.0",
+    "torch>=2.0.0",
+    "av>=11.0.0",
+    "ffmpeg-python>=0.2.0",
+    "supervision>=0.20.0",
+    "pymilvus>=2.5.0",
+    "neo4j>=5.0.0",
+    "pillow>=10.0.0",
+    "aiofiles>=23.0.0",
+    "tenacity>=8.0.0",
+    "pyyaml>=6.0.0",
+    "python-dotenv>=1.0.0",
+    "pyaml-env>=1.2.0",
+    "gradio>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "ruff>=0.1.0",
+    "pyrefly>=0.15.0",
+]
+
+[project.scripts]
+vss-poc = "run_poc:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = ["E501"]
+
+[tool.pyrefly]
+project_includes = ["src"]

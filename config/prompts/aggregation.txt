@@ -1,0 +1,11 @@
+Aggregate the following video summaries into a final comprehensive report.
+Cluster the information by category:
+- Safety Issues: Any hazards, incidents, or safety concerns
+- Operations: Normal operational activities
+- Notable Events: Unusual or significant occurrences
+- Patterns: Recurring behaviors or trends
+
+Provide timestamps where relevant.
+
+Summaries:
+{summaries}
