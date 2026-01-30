@@ -353,38 +353,38 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 7.5 Context Store (`./src/rag/context_store.py`)
 
-- [ ] Define `Document` dataclass (id, text, embedding, metadata, created_at)
-- [ ] Define `RetrievalResult` dataclass (documents, scores, query, top_k)
-- [ ] Define `ContextWindow` dataclass (documents, total_tokens, truncated)
-- [ ] Define `ContextStore` abstract base class with methods:
+- [x] Define `Document` dataclass (id, text, embedding, metadata, created_at)
+- [x] Define `RetrievalResult` dataclass (documents, scores, query, top_k)
+- [x] Define `ContextWindow` dataclass (documents, total_tokens, truncated)
+- [x] Define `ContextStore` abstract base class with methods:
   - `add_document()`, `get_document()`, `search()`, `get_all_documents()`, `delete_document()`, `clear()`
-- [ ] Implement `InMemoryContextStore` - simple in-memory implementation with cosine similarity
-- [ ] Write unit tests for `InMemoryContextStore`
+- [x] Implement `InMemoryContextStore` - simple in-memory implementation with cosine similarity
+- [x] Write unit tests for `InMemoryContextStore`
 
 ### 7.6 Milvus Context Store (`./src/rag/milvus_store.py`)
 
-- [ ] Implement `MilvusContextStore` extending `ContextStore`
-- [ ] Implement `MilvusContextStore.__init__()` - connect to Milvus, ensure collection
-- [ ] Implement `MilvusContextStore._ensure_collection()` - create collection with schema
-- [ ] Implement all abstract methods using Milvus operations
-- [ ] Write unit tests for `MilvusContextStore`
+- [x] Implement `MilvusContextStore` extending `ContextStore`
+- [x] Implement `MilvusContextStore.__init__()` - connect to Milvus, ensure collection
+- [x] Implement `MilvusContextStore._ensure_collection()` - create collection with schema
+- [x] Implement all abstract methods using Milvus operations
+- [ ] Write unit tests for `MilvusContextStore` (requires running Milvus)
 
 ### 7.7 Context Manager (`./src/rag/context_manager.py`)
 
-- [ ] Define `ContextManagerConfig` dataclass
-- [ ] Implement `ContextManager.__init__()` - initialize with embeddings, store, max_context_tokens
-- [ ] Implement `ContextManager.add_document()` - add document with optional embedding generation
-- [ ] Implement `ContextManager.add_documents_batch()` - batch add documents
-- [ ] Implement `ContextManager.retrieve()` - retrieve relevant documents for query
-- [ ] Implement `ContextManager.get_context_window()` - get context window within token limit
-- [ ] Implement `ContextManager.get_all_captions()` - get all captions for stream
-- [ ] Implement `ContextManager.get_captions_by_time_range()` - filter by time range
-- [ ] Implement `ContextManager.clear_context()` - clear context for stream
-- [ ] Implement `ContextManager._estimate_tokens()` - estimate token count
-- [ ] Implement `ContextManager._register_functions()` - register RAG functions
-- [ ] Implement `ContextManager.call()` - call registered functions
-- [ ] Implement `ContextManager.get_function()` - get function by name
-- [ ] Write unit tests for `ContextManager`
+- [x] Define `ContextManagerConfig` dataclass
+- [x] Implement `ContextManager.__init__()` - initialize with embeddings, store, max_context_tokens
+- [x] Implement `ContextManager.add_document()` - add document with optional embedding generation
+- [x] Implement `ContextManager.add_documents_batch()` - batch add documents
+- [x] Implement `ContextManager.retrieve()` - retrieve relevant documents for query
+- [x] Implement `ContextManager.get_context_window()` - get context window within token limit
+- [x] Implement `ContextManager.get_all_captions()` - get all captions for stream
+- [x] Implement `ContextManager.get_captions_by_time_range()` - filter by time range
+- [x] Implement `ContextManager.clear_context()` - clear context for stream
+- [x] Implement `ContextManager._estimate_tokens()` - estimate token count
+- [x] Implement `ContextManager.register_function()` - register RAG functions
+- [x] Implement `ContextManager.call()` - call registered functions
+- [x] Implement `ContextManager.get_function()` - get function by name
+- [x] Write unit tests for `ContextManager`
 
 ### 7.8 Hybrid Retrieval (`./src/rag/hybrid_retrieval.py`)
 
