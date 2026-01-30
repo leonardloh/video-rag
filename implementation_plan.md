@@ -319,10 +319,12 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 7.1 RAG Functions Base (`./src/rag/functions/base.py`)
 
-- [ ] Define `RAGFunction` abstract base class
-- [ ] Define `FunctionConfig` dataclass
-- [ ] Define `FunctionResult` dataclass
-- [ ] Implement abstract methods: `configure()`, `execute()`, `reset()`
+- [x] Define `RAGFunction` abstract base class
+- [x] Define `FunctionConfig` dataclass
+- [x] Define `FunctionResult` dataclass
+- [x] Implement abstract methods: `configure()`, `execute()`, `reset()`
+- [x] Define `FunctionStatus` enum
+- [x] Implement `CompositeFunction` for composing multiple functions
 
 ### 7.2 Graph Ingestion Function (`./src/rag/functions/graph_ingestion.py`)
 
@@ -343,12 +345,13 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 7.4 Batch Summarization Function (`./src/rag/functions/summarization.py`)
 
-- [ ] Implement `SummarizationFunction.__init__()` - initialize with LLM
-- [ ] Implement `SummarizationFunction.configure()` - configure batch size, prompts
-- [ ] Implement `SummarizationFunction.execute()` - batch summarize captions
-- [ ] Implement `SummarizationFunction._summarize_batch()` - summarize single batch
-- [ ] Implement `SummarizationFunction._aggregate_summaries()` - aggregate batch summaries
-- [ ] Implement `SummarizationFunction.reset()` - reset summarization state
+- [x] Implement `SummarizationFunction.__init__()` - initialize with LLM
+- [x] Implement `SummarizationFunction.configure()` - configure batch size, prompts
+- [x] Implement `SummarizationFunction.execute()` - batch summarize captions
+- [x] Implement `SummarizationFunction._summarize_batch()` - summarize single batch
+- [x] Implement `SummarizationFunction._aggregate_summaries()` - aggregate batch summaries
+- [x] Implement `SummarizationFunction.reset()` - reset summarization state
+- [x] Define `SummarizationInput` and `SummarizationOutput` dataclasses
 - [ ] Write unit tests for `SummarizationFunction`
 
 ### 7.5 Context Store (`./src/rag/context_store.py`)
@@ -418,12 +421,12 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 8.1 Stream Handler (`./src/via_stream_handler.py`)
 
-- [ ] Define `RequestStatus` enum (QUEUED, PROCESSING, SUCCESSFUL, FAILED)
-- [ ] Define `VlmRequestParams` dataclass
-- [ ] Define `ProcessingResponse` dataclass (start_timestamp, end_timestamp, response, reasoning_description)
-- [ ] Define `ChunkResult` dataclass (chunk, vlm_response, cv_metadata, frame_times, error, processing_time)
-- [ ] Define `RequestInfo` dataclass with all processing state fields
-- [ ] Implement `ViaStreamHandler.__init__()` - initialize with:
+- [x] Define `RequestStatus` enum (QUEUED, PROCESSING, SUCCESSFUL, FAILED, CANCELLED)
+- [x] Define `VlmRequestParams` dataclass
+- [x] Define `ProcessingResponse` dataclass (start_timestamp, end_timestamp, response, reasoning_description)
+- [x] Define `ChunkResult` dataclass (chunk, vlm_response, cv_metadata, frame_times, error, processing_time)
+- [x] Define `RequestInfo` dataclass with all processing state fields
+- [x] Implement `ViaStreamHandler.__init__()` - initialize with:
   - `AssetManager`
   - `GeminiFileManager`
   - `GeminiVLM`
@@ -433,20 +436,22 @@ The following gaps were identified by comparing `specs/*.md` with this implement
   - `MilvusClient`
   - `Neo4jClient`
   - config dict
-- [ ] Implement `ViaStreamHandler._init_context_manager()` - initialize CA-RAG context manager
-- [ ] Implement `ViaStreamHandler._split_video()` - split video into chunks using FileSplitter
-- [ ] Implement `ViaStreamHandler._run_vlm_pipeline()` - upload chunk to Gemini and analyze
-- [ ] Implement `ViaStreamHandler._run_cv_pipeline()` - run YOLO detection on chunk
-- [ ] Implement `ViaStreamHandler._fuse_metadata()` - fuse VLM + CV results using CVMetadataFuser
-- [ ] Implement `ViaStreamHandler._ingest_to_rag()` - ingest chunk to Milvus + Neo4j
-- [ ] Implement `ViaStreamHandler._process_chunk()` - process single chunk (VLM + CV in parallel)
-- [ ] Implement `ViaStreamHandler.process_video()` - full video processing with callbacks
-- [ ] Implement `ViaStreamHandler.summarize()` - generate summary using batch summarization
-- [ ] Implement `ViaStreamHandler.chat()` - answer questions using hybrid retrieval
-- [ ] Implement `ViaStreamHandler.get_request_status()` - get request status
-- [ ] Implement `ViaStreamHandler.get_request_progress()` - get progress percentage
-- [ ] Implement `ViaStreamHandler.cancel_request()` - cancel processing
-- [ ] Implement `ViaStreamHandler.cleanup_request()` - cleanup resources (reset DBs for stream)
+- [x] Implement `ViaStreamHandler._get_context_manager()` - get or create CA-RAG context manager per stream
+- [x] Implement `ViaStreamHandler._split_video()` - split video into chunks using FileSplitter
+- [x] Implement `ViaStreamHandler._run_vlm_pipeline()` - upload chunk to Gemini and analyze
+- [x] Implement `ViaStreamHandler._run_cv_pipeline()` - run YOLO detection on chunk
+- [x] Implement `ViaStreamHandler._fuse_metadata()` - fuse VLM + CV results using CVMetadataFuser
+- [x] Implement `ViaStreamHandler._process_chunk()` - process single chunk (VLM + CV in parallel)
+- [x] Implement `ViaStreamHandler.process_video()` - full video processing with callbacks
+- [x] Implement `ViaStreamHandler.summarize()` - generate summary using batch summarization
+- [x] Implement `ViaStreamHandler.chat()` - answer questions using hybrid retrieval
+- [x] Implement `ViaStreamHandler.get_request_status()` - get request status
+- [x] Implement `ViaStreamHandler.get_request_progress()` - get progress percentage
+- [x] Implement `ViaStreamHandler.cancel_request()` - cancel processing
+- [x] Implement `ViaStreamHandler.cleanup_request()` - cleanup resources (reset DBs for stream)
+- [x] Implement `ViaStreamHandler.list_requests()` - list all requests
+- [x] Implement `ViaStreamHandler.get_captions()` - get all captions for request
+- [x] Implement `ViaStreamHandler.get_context_for_query()` - get formatted context for query
 - [ ] Write unit tests for `ViaStreamHandler`
 
 ---
@@ -489,21 +494,23 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 10.1 Entry Point (`./run_poc.py`)
 
-- [ ] Implement CLI argument parsing (argparse)
-- [ ] Implement `--video` argument for input video path
-- [ ] Implement `--output` argument for output directory
-- [ ] Implement `--config` argument for config file path
-- [ ] Implement `--prompt` argument for custom VLM prompt
-- [ ] Implement `--enable-cv` flag for CV pipeline
-- [ ] Implement `--summarize` flag to generate summary
-- [ ] Implement `--chat` flag for interactive Q&A mode
-- [ ] Implement `--reset-db` flag to reset databases before processing
-- [ ] Implement configuration loading
-- [ ] Implement database connection initialization
-- [ ] Implement component initialization
-- [ ] Implement video processing workflow
-- [ ] Implement result output (JSON, console)
-- [ ] Add graceful shutdown handling
+- [x] Implement CLI argument parsing (argparse)
+- [x] Implement `--video` argument for input video path
+- [x] Implement `--output` argument for output directory
+- [x] Implement `--config` argument for config file path
+- [x] Implement `--prompt` argument for custom VLM prompt
+- [x] Implement `--enable-cv` flag for CV pipeline
+- [x] Implement `--summarize` flag to generate summary
+- [x] Implement `--chat` flag for interactive Q&A mode
+- [x] Implement `--enable-milvus` flag for Milvus vector DB
+- [x] Implement `--enable-neo4j` flag for Neo4j graph DB
+- [x] Implement `--log-level` argument for logging level
+- [x] Implement configuration loading
+- [x] Implement database connection initialization
+- [x] Implement component initialization
+- [x] Implement video processing workflow
+- [x] Implement result output (JSON, console)
+- [x] Add graceful shutdown handling (KeyboardInterrupt)
 
 ---
 

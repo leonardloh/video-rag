@@ -15,6 +15,16 @@ from .hybrid_retrieval import (
     RetrievalMode,
     RetrievalResult as HybridRetrievalResult,
 )
+from .functions import (
+    CompositeFunction,
+    FunctionConfig,
+    FunctionResult,
+    FunctionStatus,
+    RAGFunction,
+    SummarizationFunction,
+    SummarizationInput,
+    SummarizationOutput,
+)
 
 __all__ = [
     # Context Store
@@ -32,4 +42,13 @@ __all__ = [
     "HybridConfig",
     "RetrievalMode",
     "HybridRetrievalResult",
+    # RAG Functions
+    "RAGFunction",
+    "FunctionConfig",
+    "FunctionResult",
+    "FunctionStatus",
+    "CompositeFunction",
+    "SummarizationFunction",
+    "SummarizationInput",
+    "SummarizationOutput",
 ]
