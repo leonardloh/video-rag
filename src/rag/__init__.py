@@ -9,6 +9,12 @@ from .context_store import (
 )
 from .context_manager import ContextManager, ContextManagerConfig
 from .milvus_store import MilvusContextStore
+from .hybrid_retrieval import (
+    HybridConfig,
+    HybridRetriever,
+    RetrievalMode,
+    RetrievalResult as HybridRetrievalResult,
+)
 
 __all__ = [
     # Context Store
@@ -21,4 +27,9 @@ __all__ = [
     # Context Manager
     "ContextManager",
     "ContextManagerConfig",
+    # Hybrid Retrieval
+    "HybridRetriever",
+    "HybridConfig",
+    "RetrievalMode",
+    "HybridRetrievalResult",
 ]

@@ -388,28 +388,29 @@ The following gaps were identified by comparing `specs/*.md` with this implement
 
 ### 7.8 Hybrid Retrieval (`./src/rag/hybrid_retrieval.py`)
 
-- [ ] Define `RetrievalMode` enum (VECTOR_ONLY, GRAPH_ONLY, HYBRID)
-- [ ] Define `HybridConfig` dataclass:
+- [x] Define `RetrievalMode` enum (VECTOR_ONLY, GRAPH_ONLY, HYBRID)
+- [x] Define `HybridConfig` dataclass:
   - `mode` - retrieval strategy
   - `vector_weight` (default 0.6) - weight for vector results
   - `graph_weight` (default 0.4) - weight for graph results
   - `top_k` (default 5) - number of results
   - `rerank` (default True) - enable reranking
   - `temporal_boost` (default 1.2) - boost for adjacent chunks
-- [ ] Implement `HybridRetriever.__init__()` - initialize with Milvus client, Neo4j client, embeddings, config
-- [ ] Implement `HybridRetriever.retrieve()` - combined vector + graph retrieval
-- [ ] Implement `HybridRetriever._vector_search()` - search Milvus with query embedding
-- [ ] Implement `HybridRetriever._graph_search()` - search Neo4j for entities/events
-- [ ] Implement `HybridRetriever._merge_results()` - merge and rank results using weights
-- [ ] Implement `HybridRetriever._apply_temporal_boost()` - boost scores for temporally adjacent chunks
-- [ ] Implement `HybridRetriever._rerank()` - optional LLM-based reranking step
-- [ ] Write unit tests for `HybridRetriever`
+- [x] Implement `HybridRetriever.__init__()` - initialize with Milvus client, Neo4j client, embeddings, config
+- [x] Implement `HybridRetriever.retrieve()` - combined vector + graph retrieval
+- [x] Implement `HybridRetriever._vector_search()` - search Milvus with query embedding
+- [x] Implement `HybridRetriever._graph_search()` - search Neo4j for entities/events
+- [x] Implement `HybridRetriever._merge_results()` - merge and rank results using weights
+- [x] Implement `HybridRetriever._apply_temporal_boost()` - boost scores for temporally adjacent chunks
+- [x] Implement `HybridRetriever._rerank()` - optional LLM-based reranking step
+- [x] Implement `HybridRetriever.get_context_for_query()` - get formatted context string
+- [x] Write unit tests for `HybridRetriever`
 
 ### 7.9 RAG Module Init (`./src/rag/__init__.py`)
 
-- [ ] Export all RAG classes: `ContextManager`, `ContextStore`, `InMemoryContextStore`, `MilvusContextStore`
-- [ ] Export `HybridRetriever`, `HybridConfig`, `RetrievalMode`
-- [ ] Export all function classes and dataclasses
+- [x] Export all RAG classes: `ContextManager`, `ContextStore`, `InMemoryContextStore`, `MilvusContextStore`
+- [x] Export `HybridRetriever`, `HybridConfig`, `RetrievalMode`
+- [x] Export all function classes and dataclasses
 
 ---
 
