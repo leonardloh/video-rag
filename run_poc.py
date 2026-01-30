@@ -143,8 +143,11 @@ async def initialize_components(
                 port=milvus_cfg.get("port", int(os.environ.get("MILVUS_PORT", "19530"))),
                 collection_name=milvus_cfg.get("collection_name", "vss_poc_captions"),
             )
-            components["milvus_client"] = MilvusClient(config=milvus_config)
-            logging.info("Milvus client initialized")
+            milvus_client = MilvusClient(config=milvus_config)
+            await milvus_client.connect()
+            await milvus_client.ensure_collection()
+            components["milvus_client"] = milvus_client
+            logging.info("Milvus client initialized and connected")
         except Exception as e:
             logging.warning(f"Failed to initialize Milvus client: {e}")
 
@@ -160,8 +163,11 @@ async def initialize_components(
                 username=neo4j_cfg.get("username", os.environ.get("NEO4J_USERNAME", "neo4j")),
                 password=neo4j_cfg.get("password", os.environ.get("NEO4J_PASSWORD", "")),
             )
-            components["neo4j_client"] = Neo4jClient(config=neo4j_config)
-            logging.info("Neo4j client initialized")
+            neo4j_client = Neo4jClient(config=neo4j_config)
+            await neo4j_client.connect()
+            await neo4j_client.create_indexes()
+            components["neo4j_client"] = neo4j_client
+            logging.info("Neo4j client initialized and connected")
         except Exception as e:
             logging.warning(f"Failed to initialize Neo4j client: {e}")
 

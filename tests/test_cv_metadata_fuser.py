@@ -222,3 +222,79 @@ class TestCVMetadataFuser:
 
         # person appears 2 times in 2 frames = 1.0 avg
         assert "1.0/frame" in result
+
+    def test_fuse_from_dict_empty_metadata(
+        self,
+        fuser: CVMetadataFuser,
+    ) -> None:
+        """Test fuse_from_dict with empty metadata."""
+        caption = "A person walks in the park."
+        result = fuser.fuse_from_dict(caption, {})
+
+        assert result == caption
+
+    def test_fuse_from_dict_with_metadata(
+        self,
+        fuser: CVMetadataFuser,
+    ) -> None:
+        """Test fuse_from_dict with valid pre-aggregated metadata."""
+        caption = "A person walks in the park."
+        cv_metadata = {
+            "class_counts": {"person": 5, "car": 2},
+            "total_frames": 10,
+            "detections_per_frame": [],
+        }
+        result = fuser.fuse_from_dict(caption, cv_metadata)
+
+        assert caption in result
+        assert "[CV Detection Summary]" in result
+        assert "person" in result
+        assert "car" in result
+        assert "Frames analyzed: 10" in result
+        assert "Total detections: 7" in result
+
+    def test_fuse_from_dict_calculates_average(
+        self,
+        fuser: CVMetadataFuser,
+    ) -> None:
+        """Test fuse_from_dict calculates average per frame."""
+        caption = "Test"
+        cv_metadata = {
+            "class_counts": {"person": 10},
+            "total_frames": 5,
+        }
+        result = fuser.fuse_from_dict(caption, cv_metadata)
+
+        # 10 detections / 5 frames = 2.0 avg
+        assert "2.0/frame" in result
+
+    def test_fuse_from_dict_empty_class_counts(
+        self,
+        fuser: CVMetadataFuser,
+    ) -> None:
+        """Test fuse_from_dict with empty class_counts."""
+        caption = "Test caption"
+        cv_metadata = {
+            "class_counts": {},
+            "total_frames": 10,
+        }
+        result = fuser.fuse_from_dict(caption, cv_metadata)
+
+        # Should return original caption without modification
+        assert result == caption
+
+    def test_fuse_from_dict_zero_frames(
+        self,
+        fuser: CVMetadataFuser,
+    ) -> None:
+        """Test fuse_from_dict handles zero frames gracefully."""
+        caption = "Test"
+        cv_metadata = {
+            "class_counts": {"person": 5},
+            "total_frames": 0,
+        }
+        result = fuser.fuse_from_dict(caption, cv_metadata)
+
+        # Should still include the class counts but no avg/frame
+        assert "person: 5 instances" in result
+        assert "/frame" not in result

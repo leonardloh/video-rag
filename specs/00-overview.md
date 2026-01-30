@@ -2,7 +2,28 @@
 
 ## Executive Summary
 
-This document provides an overview of the Video Search and Summarization (VSS) PoC that replaces NVIDIA's local models with Google's Gemini 3.0 Pro and Ultralytics YOLOv26. The PoC simplifies the original architecture while maintaining core functionality.
+This document provides an overview of the Video Search and Summarization (VSS) PoC that replaces NVIDIA's local models with Google's Gemini 2.0 Flash and Ultralytics YOLOv8-seg. The PoC simplifies the original architecture while maintaining core functionality.
+
+## Implementation Status
+
+> **Last Updated**: 2026-01-30
+
+### End-to-End Test Readiness
+
+| Mode | Status | Command |
+|------|--------|---------|
+| Basic (VLM only) | ✅ **Ready** | `python run_poc.py --video video.mp4` |
+| With Summarization | ✅ **Ready** | `python run_poc.py --video video.mp4 --summarize` |
+| With Chat | ✅ **Ready** | `python run_poc.py --video video.mp4 --chat` |
+| With CV Pipeline | ✅ **Ready** | `python run_poc.py --video video.mp4 --enable-cv` |
+| With Milvus | ✅ **Ready** | `python run_poc.py --video video.mp4 --enable-milvus` |
+| With Neo4j | ✅ **Ready** | `python run_poc.py --video video.mp4 --enable-neo4j` |
+
+### Test Video
+
+- **File**: `sample_videos/car_accident.mp4` (130.65 seconds)
+- **Expected Output**: `validation/car_accident.md`
+- **Chunks**: 3 (at 60s default duration)
 
 ## Architecture Comparison
 
@@ -45,23 +66,23 @@ This document provides an overview of the Video Search and Summarization (VSS) P
 │                          PoC Engine                              │
 ├─────────────────────────────────────────────────────────────────┤
 │  VLM:                                                            │
-│  - Gemini 3.0 Pro (Native Video Upload)                         │
+│  - Gemini 2.0 Flash (Native Video Upload)                       │
 ├─────────────────────────────────────────────────────────────────┤
 │  LLM:                                                            │
-│  - Gemini 3.0 Pro                                                │
+│  - Gemini 2.0 Flash                                              │
 ├─────────────────────────────────────────────────────────────────┤
 │  Embeddings:                                                     │
-│  - Gemini text-embedding-004                                    │
+│  - Gemini text-embedding-004 (768-dim)                          │
 ├─────────────────────────────────────────────────────────────────┤
 │  CV Pipeline:                                                    │
-│  - YOLOv26-seg (Ultralytics)                                    │
+│  - YOLOv8-seg (Ultralytics) - placeholder for YOLOv26           │
 │  - ByteTrack (supervision)                                       │
 ├─────────────────────────────────────────────────────────────────┤
 │  Infrastructure:                                                 │
 │  - Single process                                                │
 │  - File-based processing only                                    │
-│  - Optional Milvus (in-memory fallback)                         │
-│  - No graph DB                                                   │
+│  - Milvus 2.5.4 (optional, in-memory fallback)                  │
+│  - Neo4j 5.26.4 (optional, for Graph RAG)                       │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -113,13 +134,14 @@ This document provides an overview of the Video Search and Summarization (VSS) P
 The following features from the original VSS engine are **not** included in the PoC:
 
 1. **Live RTSP stream processing** - File-based only
-2. **Neo4j graph database** - No graph relationships
-3. **Kubernetes deployment** - Single container
-4. **Prometheus metrics** - Basic health check only
-5. **Alert callbacks** - No notification system
-6. **NeMo Guardrails** - No content filtering
-7. **Multi-GPU distribution** - Single process
-8. **TensorRT optimization** - Standard PyTorch
+2. **Kubernetes deployment** - Single container (Docker Compose only)
+3. **Prometheus metrics** - Basic health check only
+4. **Alert callbacks** - No notification system
+5. **NeMo Guardrails** - No content filtering
+6. **Multi-GPU distribution** - Single process
+7. **TensorRT optimization** - Standard PyTorch
+
+> **Note**: Neo4j graph database IS included in the PoC for Graph RAG functionality.
 
 ## Directory Structure
 

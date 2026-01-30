@@ -471,12 +471,19 @@ class ViaStreamHandler:
         vlm_response: str,
         cv_metadata: dict[str, Any],
     ) -> str:
-        """Fuse VLM response with CV metadata."""
-        if self._cv_fuser is not None:
-            return self._cv_fuser.fuse(vlm_response, cv_metadata)
-        # Fallback: append CV metadata as JSON
-        import json
+        """Fuse VLM response with CV metadata.
 
+        Args:
+            vlm_response: VLM-generated caption text
+            cv_metadata: Pre-aggregated CV metadata dict from _run_cv_pipeline()
+
+        Returns:
+            Enriched caption with CV detection summary
+        """
+        if self._cv_fuser is not None:
+            # Use the dict-based fusion method for pre-aggregated metadata
+            return self._cv_fuser.fuse_from_dict(vlm_response, cv_metadata)
+        # Fallback: append CV metadata as JSON
         cv_summary = json.dumps(cv_metadata.get("class_counts", {}))
         return f"{vlm_response}\n\n[CV Detection: {cv_summary}]"
 

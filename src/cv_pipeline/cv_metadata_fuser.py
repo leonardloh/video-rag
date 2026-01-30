@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from collections import Counter
 from dataclasses import dataclass
-from typing import Optional
+from typing import Any, Optional
 
 from .yolo_pipeline import FrameDetection
 
@@ -174,8 +174,56 @@ class CVMetadataFuser:
 
         return json.dumps(metadata)
 
+    def fuse_from_dict(
+        self,
+        captions: str,
+        cv_metadata: dict[str, Any],
+    ) -> str:
+        """
+        Enrich captions with pre-aggregated CV metadata dictionary.
+
+        This method accepts the aggregated metadata format returned by
+        ViaStreamHandler._run_cv_pipeline() instead of raw FrameDetection objects.
+
+        Args:
+            captions: VLM-generated captions
+            cv_metadata: Pre-aggregated CV metadata with keys:
+                - class_counts: dict[str, int] - object counts per class
+                - total_frames: int - number of frames processed
+                - detections_per_frame: list[dict] - per-frame detection details
+
+        Returns:
+            Enriched captions with object counts and classes
+        """
+        if not cv_metadata:
+            return captions
+
+        class_counts = cv_metadata.get("class_counts", {})
+        total_frames = cv_metadata.get("total_frames", 0)
+
+        if not class_counts:
+            return captions
+
+        # Calculate total detections
+        total_detections = sum(class_counts.values())
+
+        # Create metadata summary
+        metadata = "\n\n[CV Detection Summary]\n"
+        metadata += f"Frames analyzed: {total_frames}\n"
+        metadata += f"Total detections: {total_detections}\n"
+        metadata += "Detected objects:\n"
+
+        for class_name, count in sorted(class_counts.items(), key=lambda x: -x[1]):
+            if total_frames > 0:
+                avg_per_frame = count / total_frames
+                metadata += f"  - {class_name}: {count} instances (avg {avg_per_frame:.1f}/frame)\n"
+            else:
+                metadata += f"  - {class_name}: {count} instances\n"
+
+        return captions + metadata
+
     @staticmethod
-    def from_json_metadata(json_str: str) -> dict:
+    def from_json_metadata(json_str: str) -> dict[str, Any]:
         """
         Parse JSON metadata string.
 
